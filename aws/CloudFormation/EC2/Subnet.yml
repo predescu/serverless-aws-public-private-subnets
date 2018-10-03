@@ -1,0 +1,57 @@
+PrivateSubnetA:
+  Type: AWS::EC2::Subnet
+  Properties:
+    AvailabilityZone: ${self:provider.region}a
+    CidrBlock: "10.0.0.0/24"
+    VpcId:
+      Ref: VPC
+    Tags:
+      - Key: Name
+        Value: ${self:service}-${self:provider.stage}
+      - Key: Service
+        Value: ${self:service}
+      - Key: Stage
+        Value: ${self:provider.stage}
+
+PrivateSubnetB:
+  Type: AWS::EC2::Subnet
+  Properties:
+    AvailabilityZone: ${self:provider.region}b
+    CidrBlock: "10.0.16.0/24"
+    VpcId:
+      Ref: VPC
+    Tags:
+      - Key: Name
+        Value: ${self:service}-${self:provider.stage}
+      - Key: Service
+        Value: ${self:service}
+      - Key: Stage
+        Value: ${self:provider.stage}
+
+PrivateSubnetC:
+  Type: AWS::EC2::Subnet
+  Properties:
+    AvailabilityZone: ${self:provider.region}c
+    CidrBlock: "10.0.32.0/24"
+    VpcId:
+      Ref: VPC
+    Tags:
+      - Key: Name
+        Value: ${self:service}-${self:provider.stage}
+      - Key: Service
+        Value: ${self:service}
+
+WebSubnetA:
+  Type: 'AWS::EC2::Subnet'
+  Properties:
+    AvailabilityZone: ${self:provider.region}a
+    CidrBlock: "10.0.48.0/24"
+    VpcId:
+      Ref: VPC
+    Tags:
+    - Key: Name
+      Value: ${self:service}-${self:provider.stage}
+    - Key: Service
+      Value: ${self:service}
+    - Key: Stage
+      Value: ${self:provider.stage}

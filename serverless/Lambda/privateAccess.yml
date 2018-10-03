@@ -1,0 +1,15 @@
+privateAccessFunction:
+  handler: aws/Lambda/privateAccess.handler
+  name: ${self:service}-${self:provider.stage}-privateAccess
+  description: Private Access Function
+  timeout: 3
+  tags:
+    Name: ${self:service}-${self:provider.stage}
+    Service: ${self:service}
+  vpc:
+    securityGroupIds:
+    - Ref: PrivateSecurityGroup
+    subnetIds:
+    - Ref: SubnetA
+    - Ref: SubnetB
+    - Ref: SubnetC

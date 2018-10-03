@@ -1,0 +1,8 @@
+InternetGateway:
+  Type: AWS::EC2::InternetGateway
+  Properties:
+    Tags:
+    - Key: Name
+      Value: ${self:service}-${self:provider.stage}
+    - Key: Service
+      Value: ${self:service}

@@ -1,0 +1,16 @@
+NatGateway:
+  Type: AWS::EC2::NatGateway
+  Properties:
+    AllocationId:
+      Fn::GetAtt:
+      - WebAddressEIP
+      - AllocationId
+    SubnetId:
+      Ref: WebSubnetA
+    Tags:
+    - Key: Name
+      Value: ${self:service}-${self:provider.stage}
+    - Key: Service
+      Value: ${self:service}
+    - Key: Stage
+      Value: ${self:provider.stage}

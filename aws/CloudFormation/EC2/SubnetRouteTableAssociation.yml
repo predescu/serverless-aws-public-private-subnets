@@ -1,0 +1,28 @@
+WebSubnetRouteTableAssociation:
+  Type: AWS::EC2::SubnetRouteTableAssociation
+  Properties:
+    RouteTableId:
+      Ref: WebRouteTable
+    SubnetId:
+      Ref: WebSubnetA
+PrivateASubnetRouteTableAssociation:
+  Type: AWS::EC2::SubnetRouteTableAssociation
+  Properties:
+    RouteTableId:
+      Ref: WebRouteTable
+    SubnetId:
+      Ref: PrivateSubnetA
+PrivateBSubnetRouteTableAssociation:
+  Type: AWS::EC2::SubnetRouteTableAssociation
+  Properties:
+    RouteTableId:
+      Ref: WebRouteTable
+    SubnetId:
+      Ref: PrivateSubnetB
+PrivateCSubnetRouteTableAssociation:
+  Type: AWS::EC2::SubnetRouteTableAssociation
+  Properties:
+    RouteTableId:
+      Ref: WebRouteTable
+    SubnetId:
+      Ref: PrivateSubnetC

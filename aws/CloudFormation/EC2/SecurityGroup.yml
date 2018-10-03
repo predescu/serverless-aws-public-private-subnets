@@ -1,0 +1,22 @@
+WebSecurityGroup:
+  Type: 'AWS::EC2::SecurityGroup'
+  Properties:
+    VpcId:
+      Ref: VPC
+    GroupDescription: Enable HTTP access via user defined port
+    Tags:
+    - Key: Name
+      Value: ${self:service}-${self:provider.stage}
+    - Key: Service
+      Value: ${self:service}
+PrivateSecurityGroup:
+  Type: 'AWS::EC2::SecurityGroup'
+  Properties:
+    VpcId:
+      Ref: VPC
+    GroupDescription: Created from the Serveles Service ${self:service}
+    Tags:
+      - Key: Name
+        Value: ${self:service}-${self:provider.stage}
+      - Key: Service
+        Value: ${self:service}

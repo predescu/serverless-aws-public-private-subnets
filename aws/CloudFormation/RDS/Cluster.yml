@@ -1,0 +1,24 @@
+ServerlessAurora:
+  Type: AWS::RDS::DBCluster
+  Properties:
+    DBClusterIdentifier: ${self:service}-${self:provider.stage}
+    BackupRetentionPeriod: ${file(./env.yml):${opt:stage, self:provider.stage}.BACKUP_RETENTION_PERIOD}
+    Engine: aurora
+    EngineMode: serverless
+    MasterUsername: ${file(./env.yml):${opt:stage, self:provider.stage}.DB_MASTER_USERNAME}
+    MasterUserPassword: ${file(./env.yml):${opt:stage, self:provider.stage}.DB_MASTER_USER_PASSWORD}
+    PreferredBackupWindow: 03:16-03:46
+    PreferredMaintenanceWindow: thu:04:37-thu:05:07
+    ScalingConfiguration:
+      AutoPause: true
+      MinCapacity: ${file(./env.yml):${opt:stage, self:provider.stage}.DB_SCALING_CONFIGURATION_MIN_CAPACITY}
+      MaxCapacity: ${file(./env.yml):${opt:stage, self:provider.stage}.DB_SCALING_CONFIGURATION_MAX_CAPACITY}
+    DBSubnetGroupName:
+      Ref: RDSSubnetGroup
+    VpcSecurityGroupIds:
+      - Ref: PrivateSecurityGroup
+    Tags:
+      - Key: Name
+        Value: ${self:service}-${self:provider.stage}
+      - Key: Service
+        Value: ${self:service}

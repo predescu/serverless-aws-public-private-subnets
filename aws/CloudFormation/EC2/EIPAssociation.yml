@@ -1,0 +1,9 @@
+WebEIPAssociation:
+  Type: 'AWS::EC2::EIPAssociation'
+  Properties:
+    AllocationId:
+      Fn::GetAtt:
+      - WebAddressEIP
+      - AllocationId
+    NetworkInterfaceId:
+      Ref: WebNetworkInterface

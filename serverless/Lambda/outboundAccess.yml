@@ -1,0 +1,20 @@
+outboundAccessFunction:
+  handler: aws/Lambda/outboundAccess.handler
+  name: ${self:service}-${self:provider.stage}-outboundAccess
+  description: Outbound Access Function
+  timeout: 5
+  package:
+    include:
+    - aws/Lambda/outboundAccess.js
+  tags:
+    Name: ${self:service}-${self:provider.stage}
+    Service: ${self:service}
+  vpc:
+    securityGroupIds:
+    - Ref: PrivateSecurityGroup
+    - Ref: WebSecurityGroup
+    subnetIds:
+    - Ref: WebSubnetA
+    - Ref: PrivateSubnetA
+    - Ref: PrivateSubnetB
+    - Ref: PrivateSubnetC

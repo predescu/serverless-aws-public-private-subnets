@@ -1,0 +1,20 @@
+ElastiCacheCluster:
+  Type: AWS::ElastiCache::CacheCluster
+  Properties:
+    AutoMinorVersionUpgrade: true
+    AZMode: single-az
+    CacheNodeType: cache.t2.micro
+    CacheSubnetGroupName:
+      Ref: ElastiCacheSubnetGroup
+    ClusterName: ${self:service}-${self:provider.stage}
+    Engine: memcached
+    NumCacheNodes: 1
+    PreferredAvailabilityZone: ${self:provider.region}a
+    PreferredMaintenanceWindow: thu:04:00-thu:06:00
+    Tags:
+      - Key: Name
+        Value: ${self:service}-${self:provider.stage}
+      - Key: Service
+        Value: ${self:service}
+    VpcSecurityGroupIds:
+      - Ref: PrivateSecurityGroup

@@ -1,0 +1,44 @@
+service: sls-aws-vpc-example
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'eu-west-1'}
+  timeout: 3
+package:
+  individually: true
+  exclude:
+  - ./**
+
+resources:
+  Resources:
+    WebAddressEIP: ${file(./aws/CloudFormation/EC2/EIP.yml):WebAddressEIP}
+    VPC: ${file(./aws/CloudFormation/EC2/VPC.yml):VPC}
+    InternetGateway: ${file(./aws/CloudFormation/EC2/InternetGateway.yml):InternetGateway}
+    WebVPCGatewayAttachment:  ${file(./aws/CloudFormation/EC2/VPCGatewayAttachment.yml):WebVPCGatewayAttachment}
+    WebRouteTable: ${file(./aws/CloudFormation/EC2/RouteTable.yml):WebRouteTable}
+    WebRoute: ${file(./aws/CloudFormation/EC2/Route.yml):WebRoute}
+    WebSubnetA: ${file(./aws/CloudFormation/EC2/Subnet.yml):WebSubnetA}
+    PrivateSubnetA: ${file(./aws/CloudFormation/EC2/Subnet.yml):PrivateSubnetA}
+    PrivateSubnetB: ${file(./aws/CloudFormation/EC2/Subnet.yml):PrivateSubnetB}
+    PrivateSubnetC: ${file(./aws/CloudFormation/EC2/Subnet.yml):PrivateSubnetC}
+    WebSubnetRouteTableAssociation: ${file(./aws/CloudFormation/EC2/SubnetRouteTableAssociation.yml):WebSubnetRouteTableAssociation}
+    WebSecurityGroup: ${file(./aws/CloudFormation/EC2/SecurityGroup.yml):WebSecurityGroup}
+    HTTPSWebSecurityGroupEgress: ${file(./aws/CloudFormation/EC2/SecurityGroupEgress.yml):HTTPSWebSecurityGroupEgress}
+    PrivateSecurityGroup: ${file(./aws/CloudFormation/EC2/SecurityGroup.yml):PrivateSecurityGroup}
+    PrivateASubnetRouteTableAssociation: ${file(./aws/CloudFormation/EC2/SubnetRouteTableAssociation.yml):PrivateASubnetRouteTableAssociation}
+    PrivateBSubnetRouteTableAssociation: ${file(./aws/CloudFormation/EC2/SubnetRouteTableAssociation.yml):PrivateBSubnetRouteTableAssociation}
+    PrivateCSubnetRouteTableAssociation: ${file(./aws/CloudFormation/EC2/SubnetRouteTableAssociation.yml):PrivateCSubnetRouteTableAssociation}
+    WebNetworkInterface: ${file(./aws/CloudFormation/EC2/NetworkInterface.yml):WebNetworkInterface}
+    WebEIPAssociation: ${file(./aws/CloudFormation/EC2/EIPAssociation.yml):WebEIPAssociation}
+
+
+    RDSSubnetGroup: ${file(./aws/CloudFormation/RDS/SubnetGroup.yml):RDSSubnetGroup}
+    DBCluster: ${file(./aws/CloudFormation/RDS/Cluster.yml):ServerlessAurora}
+#    ElastiCacheSubnetGroup: ${file(./aws/CloudFormation/ElastiCache/SubnetGroup.yml):ElastiCacheSubnetGroup}
+#    ElastiCacheCluster: ${file(./aws/CloudFormation/ElastiCache/Cluster.yml):ElastiCacheCluster}
+    SqsDeadLetterQueue: ${file(./aws/CloudFormation/SQS/Queue.yml):DeadLetterQueue}
+
+functions:
+  outboundAccessFunctionFunction:  ${file(./serverless/Lambda/outboundAccess.yml):outboundAccessFunction}

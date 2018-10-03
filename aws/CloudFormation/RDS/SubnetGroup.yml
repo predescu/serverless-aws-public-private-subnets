@@ -1,0 +1,14 @@
+RDSSubnetGroup:
+  Type: AWS::RDS::DBSubnetGroup
+  Properties:
+    DBSubnetGroupName: ${self:service}-${self:provider.stage}
+    DBSubnetGroupDescription: Created from the Serveles Service ${self:service}
+    SubnetIds:
+    - Ref: PrivateSubnetA
+    - Ref: PrivateSubnetB
+    - Ref: PrivateSubnetC
+    Tags:
+      - Key: Name
+        Value: ${self:service}-${self:provider.stage}
+      - Key: Service
+        Value: ${self:service}

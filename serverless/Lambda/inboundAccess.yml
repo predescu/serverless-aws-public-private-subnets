@@ -1,0 +1,15 @@
+inboundAccessFunction:
+  handler: aws/Lambda/inboundAccess.handler
+  name: ${self:service}-${self:provider.stage}-inboundAccess
+  description: Inbound Access Function
+  timeout: 3
+  tags:
+    Name: ${self:service}-${self:provider.stage}
+    Service: ${self:service}
+  vpc:
+    securityGroupIds:
+    - Ref: WebSecurityGroup
+    subnetIds:
+    - Ref: SubnetA
+    - Ref: SubnetB
+    - Ref: SubnetC

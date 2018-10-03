@@ -1,0 +1,10 @@
+WebRouteTable:
+  Type: AWS::EC2::RouteTable
+  Properties:
+    VpcId:
+      Ref: VPC
+    Tags:
+    - Key: Name
+      Value: ${self:service}-${self:provider.stage}
+    - Key: Service
+      Value: ${self:service}

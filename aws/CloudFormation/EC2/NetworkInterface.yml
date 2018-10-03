@@ -1,0 +1,16 @@
+WebNetworkInterface:
+  Type: 'AWS::EC2::NetworkInterface'
+  Properties:
+    SubnetId:
+      Ref: WebSubnetA
+    Description: Interface for web access
+    GroupSet:
+    - Ref: WebSecurityGroup
+    SourceDestCheck: 'true'
+    Tags:
+    - Key: Name
+      Value: ${self:service}-${self:provider.stage}
+    - Key: Service
+      Value: ${self:service}
+    - Key: Network
+      Value: Web

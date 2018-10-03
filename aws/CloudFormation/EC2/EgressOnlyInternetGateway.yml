@@ -1,0 +1,5 @@
+EgressOnlyInternetGateway:
+  Type: AWS::EC2::EgressOnlyInternetGateway
+  Properties:
+    VpcId:
+      Ref: VPC

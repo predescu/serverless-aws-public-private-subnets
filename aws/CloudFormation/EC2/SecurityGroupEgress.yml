@@ -1,0 +1,10 @@
+HTTPSWebSecurityGroupEgress:
+  Type: AWS::EC2::SecurityGroupEgress
+  Properties:
+    Description:  Enable HTTPS external calls on port 443
+    GroupId:
+      Ref: WebSecurityGroup
+    IpProtocol: tcp
+    CidrIp: 0.0.0.0/0
+    FromPort: 443
+    ToPort: 443
