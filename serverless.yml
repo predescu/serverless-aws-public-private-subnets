@@ -1,4 +1,4 @@
-service: sls-aws-vpc-example
+service: testing
 
 provider:
   name: aws
@@ -36,8 +36,8 @@ resources:
 
     RDSSubnetGroup: ${file(./aws/CloudFormation/RDS/SubnetGroup.yml):RDSSubnetGroup}
     DBCluster: ${file(./aws/CloudFormation/RDS/Cluster.yml):ServerlessAurora}
-#    ElastiCacheSubnetGroup: ${file(./aws/CloudFormation/ElastiCache/SubnetGroup.yml):ElastiCacheSubnetGroup}
-#    ElastiCacheCluster: ${file(./aws/CloudFormation/ElastiCache/Cluster.yml):ElastiCacheCluster}
+    ElastiCacheSubnetGroup: ${file(./aws/CloudFormation/ElastiCache/SubnetGroup.yml):ElastiCacheSubnetGroup}
+    ElastiCacheCluster: ${file(./aws/CloudFormation/ElastiCache/Cluster.yml):ElastiCacheCluster}
     SqsDeadLetterQueue: ${file(./aws/CloudFormation/SQS/Queue.yml):DeadLetterQueue}
 
 functions:

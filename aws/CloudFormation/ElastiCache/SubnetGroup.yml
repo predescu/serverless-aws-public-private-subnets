@@ -4,6 +4,6 @@ ElastiCacheSubnetGroup:
     CacheSubnetGroupName: ${self:service}-${self:provider.stage}
     Description: Created from the Serveles Service ${self:service}
     SubnetIds:
-    - Ref: SubnetA
-    - Ref: SubnetB
-    - Ref: SubnetC
+    - Ref: PrivateSubnetA
+    - Ref: PrivateSubnetB
+    - Ref: PrivateSubnetC
